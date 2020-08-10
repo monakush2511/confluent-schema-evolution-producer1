@@ -1,3 +1,7 @@
+topic:
+  name: sensor_topic
+  partitions-num: 3
+  replication-factor: 3
 spring:
   cloud:
     stream:
@@ -6,11 +10,9 @@ spring:
           contentType: application/*+avro
           destination: sensor-topic
       schemaRegistryClient:
-        endpoint: http://localhost:8081
+        endpoint: https://psrc-lgy7n.europe-west3.gcp.confluent.cloud
     schema:
       avro:
         schema-locations: classpath:avro/sensor.avsc
-        subjectNamePrefix:  sensor-topic-value
+        subjectNamePrefix:  sensor_topic-value
         subjectNamingStrategy: org.springframework.cloud.schema.registry.avro.SubjectPrefixOnlyNamingStrategy
-
-server.port: 9009

@@ -1,0 +1,18 @@
+topic:
+  name: sensor_topic
+  partitions-num: 3
+  replication-factor: 3
+spring:
+  cloud:
+    stream:
+      bindings:
+        supplier-out-0:
+          contentType: application/*+avro
+          destination: sensor-topic
+      schemaRegistryClient:
+        endpoint: https://psrc-lgy7n.europe-west3.gcp.confluent.cloud
+    schema:
+      avro:
+        schema-locations: classpath:avro/sensor.avsc
+        subjectNamePrefix:  sensor_topic-value
+        subjectNamingStrategy: org.springframework.cloud.schema.registry.avro.SubjectPrefixOnlyNamingStrategy
